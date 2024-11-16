@@ -71,13 +71,13 @@ async function waitForRunnerRegistered(label) {
         reject(`A timeout of ${timeoutMinutes} minutes is exceeded. Your AWS EC2 instance was not able to register itself in GitHub as a new self-hosted runner.`);
       }
 
-      if (runner && runner.status === 'online') {
+      if (runner && runner.status === 'idle') {
         core.info(`GitHub self-hosted runner ${runner.name} is registered and ready to use`);
         clearInterval(interval);
         resolve();
       } else {
         waitSeconds += retryIntervalSeconds;
-        core.info('Checking...');
+        core.info(`Checking... ${runner.name}`);
       }
     }, retryIntervalSeconds * 1000);
   });
