@@ -68,7 +68,7 @@ async function waitForRunnerRegistered(label) {
       if (waitSeconds > timeoutMinutes * 60) {
         core.error('GitHub self-hosted runner registration error');
         clearInterval(interval);
-        reject(`A timeout of ${timeoutMinutes} minutes is exceeded. Your AWS EC2 instance was not able to register itself in GitHub as a new self-hosted runner.`);
+        reject(`BA timeout of ${timeoutMinutes} minutes is exceeded. Your AWS EC2 instance was not able to register itself in GitHub as a new self-hosted runner.`);
       }
 
       if (runner && runner.status === 'idle') {
@@ -77,7 +77,7 @@ async function waitForRunnerRegistered(label) {
         resolve();
       } else {
         waitSeconds += retryIntervalSeconds;
-        core.info(`Checking... ${runner.name}`);
+        core.info(`Checking... ${runner.status}`);
       }
     }, retryIntervalSeconds * 1000);
   });
